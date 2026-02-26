@@ -1,121 +1,138 @@
 # Binance Futures Testnet Trading Bot
 
-## Overview
+A modular **Python trading bot** for placing orders on the **Binance USDT-M Futures Testnet**.
 
-This project is a Python command-line application that places **MARKET** and **LIMIT** orders on the **Binance USDT-M Futures Testnet**.
+This project includes both:
 
-The application demonstrates:
+• A **Command Line Interface (CLI)**  
+• A **Lightweight Web UI**
 
-* Interaction with the Binance Futures Testnet API
-* A structured and modular Python codebase
-* CLI-based user input using `argparse`
-* Logging of requests, responses, and errors
-* Basic input validation and exception handling
+The bot supports **Market, Limit, and Stop orders**, with **logging, validation, and error handling**.
 
----
+This project demonstrates:
 
-## Features
-
-* Place **MARKET orders**
-* Place **LIMIT orders**
-* Supports **BUY** and **SELL** order sides
-* Command-line interface for order input
-* API request and response logging
-* Error handling for invalid input and API failures
+- Binance Futures API interaction
+- Structured Python project design
+- CLI development using argparse
+- Web UI using Flask
+- Logging and debugging
+- Input validation and error handling
 
 ---
 
-## Project Structure
+# Features
 
-```
-trading_bot/
-│
-├── bot/
-│   ├── __init__.py
-│   ├── client.py          # Binance API request & authentication
-│   ├── orders.py          # Order placement logic
-│   ├── validators.py      # CLI input validation
-│   └── logging_config.py  # Logging configuration
-│
-├── logs/
-│   └── trading_bot.log    # API request/response logs
-│
-├── cli.py                 # CLI entry point
-├── requirements.txt       # Python dependencies
-├── .env                   # API credentials (not committed)
-├── .gitignore
-└── README.md
-```
+## Core Features
+
+- Place **MARKET orders**
+- Place **LIMIT orders**
+- Place **STOP orders**
+- Supports **BUY and SELL**
+- CLI interface for placing trades
+- Logging of API requests and responses
+- Exception handling for API errors
+- Input validation
 
 ---
 
+## Bonus Features
+
+- Lightweight **Web UI for placing trades**
+- **Live BTC price display**
+- Modular project architecture
+- Request and response logging
+- Error messages displayed in UI
+
+---
+
+# Project Structure
+binance-futures-trading-bot
+│
+├── bot
+│ ├── client.py
+│ ├── orders.py
+│ ├── validators.py
+│ └── logging_config.py
+│
+├── templates
+│ └── index.html
+│
+├── static
+│ └── styles.css
+│
+├── cli.py
+├── ui.py
+├── requirements.txt
+├── README.md
+└── .env
+
+---
+
+# Setup Instructions
+
+## 1 Clone the Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/binance-futures-trading-bot.git
+cd binance-futures-trading-bot
 ## Setup Instructions
 
-### 1. Clone the repository
+### 2. Create Virtual Environment
 
-```
-git clone <your-repo-url>
-cd trading_bot
-```
-
----
-
-### 2. Create a virtual environment
-
-```
+```bash
 python -m venv .venv
 ```
 
 Activate it:
 
-Windows
+**Windows**
 
-```
+```bash
 .venv\Scripts\activate
 ```
 
-Mac/Linux
+**Mac / Linux**
 
-```
+```bash
 source .venv/bin/activate
 ```
 
 ---
 
-### 3. Install dependencies
+### 3. Install Dependencies
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-### 4. Configure API keys
+### 4. Configure API Keys
 
-Create a `.env` file in the project root:
+Create a `.env` file in the root directory.
 
-```
+```env
 BINANCE_API_KEY=your_api_key
-BINANCE_API_SECRET=your_secret_key
+BINANCE_API_SECRET=your_api_secret
 ```
 
-API keys must be generated from:
+Generate API keys from:
 
-```
 https://testnet.binancefuture.com
-```
 
 ---
 
-## Running the Bot
+# Running the Bot
 
-### Place a MARKET Order
+## CLI Mode
 
-```
+### Market Order
+
+```bash
 python cli.py --symbol BTCUSDT --side BUY --type MARKET --quantity 0.01
 ```
 
-Example output:
+Example Output:
 
 ```
 Order Request Summary
@@ -136,15 +153,54 @@ SUCCESS: Order placed!
 
 ---
 
-### Place a LIMIT Order
+### Limit Order
 
-```
+```bash
 python cli.py --symbol BTCUSDT --side SELL --type LIMIT --quantity 0.01 --price 70000
 ```
 
 ---
 
-## Logging
+### Stop Order
+
+```bash
+python cli.py --symbol BTCUSDT --side BUY --type STOP --quantity 0.01 --price 68000 --stop-price 67500
+```
+
+---
+
+# Web Interface
+
+Run the web UI:
+
+```bash
+python ui.py
+```
+
+Open browser:
+
+```
+http://127.0.0.1:5000
+```
+
+The UI allows you to:
+
+- Enter symbol  
+- Select order side  
+- Select order type  
+- Enter quantity  
+- Enter limit price  
+- Enter stop price  
+- Place orders directly from the browser  
+
+It also displays:
+
+- Live BTC price  
+- Order response messages  
+
+---
+
+# Logging
 
 All API requests, responses, and errors are logged to:
 
@@ -160,45 +216,61 @@ INFO - {'orderId': 12550417640, 'symbol': 'BTCUSDT', 'status': 'NEW'}
 
 ---
 
-## Error Handling
+# Error Handling
 
 The application handles:
 
-* Invalid CLI inputs
-* Missing parameters
-* Binance API errors
-* Network failures
+- Invalid CLI inputs  
+- Missing parameters  
+- Binance API errors  
+- Network failures  
 
-Errors returned from the Binance API are printed clearly in the CLI and logged to the log file.
+Errors returned from Binance are clearly displayed in:
 
----
-
-## Assumptions
-
-* The application uses **Binance USDT-M Futures Testnet**
-* A valid testnet API key and secret are required
-* Order quantity must satisfy Binance minimum trading limits
+- CLI output  
+- Web UI response box  
+- Log file  
 
 ---
 
-## Dependencies
+# Assumptions
 
-Listed in `requirements.txt`:
+- The bot connects to **Binance Futures Testnet**
+- A valid **testnet API key and secret** are required
+- Orders must satisfy **Binance minimum trading limits**
 
+---
+
+# Dependencies
+
+Dependencies listed in `requirements.txt`:
+
+- requests  
+- python-dotenv  
+- flask  
+
+Install using:
+
+```bash
+pip install -r requirements.txt
 ```
-requests
-python-dotenv
-```
-Bonus Features
-
-• Stop order support  
-• Lightweight Web UI  
-• Live BTC price display  
-• Input validation  
-• Logging system
 
 ---
 
-## Author
+# Author
 
-Suma Priya Chittari
+**Suma Priya Chittari**
+
+---
+
+# Project Summary
+
+This project demonstrates:
+
+- Python API integration  
+- Modular code architecture  
+- CLI development  
+- Web UI integration  
+- Logging and validation  
+
+It acts as a **mini trading system prototype interacting with the Binance Futures Testnet**.
