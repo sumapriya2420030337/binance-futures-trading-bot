@@ -189,6 +189,13 @@ Listed in `requirements.txt`:
 requests
 python-dotenv
 ```
+Bonus Features
+
+• Stop order support  
+• Lightweight Web UI  
+• Live BTC price display  
+• Input validation  
+• Logging system
 
 ---
 

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Binance Futures Trading Bot</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Binance Futures Trading Bot</h1>
+
+<p class="price">BTC Price: ${{ price }}</p>
+
+<form method="POST">
+
+<label>Symbol</label>
+<input name="symbol" value="BTCUSDT">
+
+<label>Side</label>
+<select name="side">
+<option value="BUY">BUY</option>
+<option value="SELL">SELL</option>
+</select>
+
+<label>Order Type</label>
+<select name="order_type">
+<option value="MARKET">MARKET</option>
+<option value="LIMIT">LIMIT</option>
+<option value="STOP">STOP</option>
+</select>
+
+<label>Quantity</label>
+<input name="quantity">
+
+<label>Price (Limit / Stop)</label>
+<input name="price">
+
+<label>Stop Price (Stop order)</label>
+<input name="stop_price">
+
+<button type="submit">Place Order</button>
+
+</form>
+
+{% if result %}
+<div class="result">
+<pre>{{ result }}</pre>
+</div>
+{% endif %}
+
+</div>
+
+</body>
+</html>
